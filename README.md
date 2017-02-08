@@ -56,3 +56,10 @@ Tested on
 =========
 
 * Debian Jessie
+
+Warning
+=======
+
+This is for test purpose only, for a production use you **must**
+secure the connection with another method than **trust** in your
+pg_hba.
