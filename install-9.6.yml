@@ -1,0 +1,14 @@
+---
+- hosts: all
+  become: yes
+  become_user: root
+  become_method: sudo
+  gather_facts: yes
+  vars:
+    pgversion: 9.6
+
+  roles:
+    - apt-pgdg
+    - postgresql-install
+    - citus-install
+    - postgresql-config

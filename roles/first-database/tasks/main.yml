@@ -1,0 +1,10 @@
+---
+- name: create database
+  postgresql_db:
+    name: citus
+    encoding: UTF-8
+
+- name: create extension citus
+  postgresql_ext:
+    name: citus
+    db: citus

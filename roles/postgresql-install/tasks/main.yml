@@ -1,0 +1,29 @@
+---
+- name: install pgdg-keyring
+  apt:
+    update_cache=yes
+    cache_valid_time=3600
+    pkg=pgdg-keyring
+
+- name: install postgresql-{{ pgversion }}
+  apt:
+    update_cache=yes
+    cache_valid_time=3600
+    pkg=postgresql-{{ pgversion }}
+
+- name: postgresql-contrib-{{ pgversion }}
+  apt:
+    update_cache=yes
+    cache_valid_time=3600
+    pkg=postgresql-contrib-{{ pgversion }}
+
+- name: python-psycopg2
+  apt:
+    update_cache=yes
+    cache_valid_time=3600
+    pkg=python-psycopg2
+
+- name: pgtop
+  apt:
+    update_cache=yes cache_valid_time=3600
+    pkg=pgtop

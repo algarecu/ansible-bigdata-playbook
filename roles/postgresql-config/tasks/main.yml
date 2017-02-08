@@ -1,0 +1,21 @@
+---
+- name: configure listen-addresses
+  shell:
+    /usr/bin/pg_conftool {{ pgversion }} main set listen_addresses '*'
+
+- name: configure shared_preload_libraries
+  shell:
+    /usr/bin/pg_conftool {{ pgversion }} main set shared_preload_libraries 'citus'
+
+- name: configure pg_hba.conf
+  template:
+    src=files/pg_hba.j2
+    dest=/etc/postgresql/{{ pgversion }}/main/pg_hba.conf
+    mode=0640
+    owner=postgres
+    group=postgres
+
+- name: restart postgresql
+  systemd:
+    name=postgresql
+    state=restarted

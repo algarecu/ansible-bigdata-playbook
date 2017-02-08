@@ -1,0 +1,10 @@
+---
+- hosts: master
+  become: yes
+  become_user: postgres
+  become_method: sudo
+
+  tasks:
+    - name: create extension citus
+      shell: psql -d citus -c "SELECT * FROM master_add_node('{{ item }}', 5432);"
+      with_items: "{{ groups['worker'] }}"

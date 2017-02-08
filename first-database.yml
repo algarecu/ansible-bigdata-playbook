@@ -1,0 +1,11 @@
+---
+- hosts: all
+  become: yes
+  become_user: postgres
+  become_method: sudo
+  gather_facts: yes
+  vars:
+    pgversion: 9.6
+
+  roles:
+    - first-database
