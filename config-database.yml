@@ -5,7 +5,7 @@
   become_method: sudo
   gather_facts: yes
   vars:
-    pgversion: 9.6
+    pgversion: 11
 
   roles:
-    - first-database
+    - config-database

@@ -5,6 +5,12 @@
   become_method: sudo
 
   tasks:
-    - name: create extension citus
-      shell: psql -d citus -c "SELECT * FROM master_add_node('{{ item }}', 5432);"
-      with_items: "{{ groups['worker'] }}"
+    - name: create citus extension
+      shell: psql -d database -c "CREATE EXTENSION citus;"
+    - name: crate extension postgis
+      shell: psql -d database -c "CREATE EXTENSION postgis;"
+    - name: add workers
+      shell: psql -d database -c "SELECT * FROM master_add_node('{{ item }}', 5432);"
+      - debug: msg="host is {{item}}"
+        with_items: "{{ groups['worker'] }}"
+

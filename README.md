@@ -4,9 +4,9 @@ Ansible playbook to deploy a citus cluster
 Playbooks
 =========
 
-* install-9.6.yml : install postgresql cluster
+* install-11.yml : install postgresql cluster
 
-* first-database.yml : create a database and configure citus in it
+* config-database.yml : create a database and configure citus in it
 
 * citus.yml : activate citus on master node
 
@@ -19,9 +19,9 @@ master node, and one called `worker`
 
 Launch the playbook
 
-`$ ansible-playbook -i hosts.ini install-9.6.yml`
+`$ ansible-playbook -i hosts.ini install-11.yml`
 
-`$ ansible-playbook -i hosts.ini first-database.yml`
+`$ ansible-playbook -i hosts.ini config-database.yml`
 
 `$ ansible-playbook -i hosts.ini citus.yml`
 
@@ -39,7 +39,7 @@ What the playbook do
 
 * set up the pgdg debian repo https://wiki.postgresql.org/wiki/Apt
 
-* install postgresql-9.6 with contrib package
+* install postgresql-11 with contrib package
 
 * install the citus package
 

@@ -1,6 +1,6 @@
 ---
-- name: install postgresql-{{ pgversion }}-citus
+- name: install postgresql-{{ pgversion }}-citus-{{ citusversion }}
   apt:
     update_cache=yes
     cache_valid_time=3600
-    pkg=postgresql-{{ pgversion }}-citus
+    pkg=postgresql-{{ pgversion }}-citus-{{ citusversion }}

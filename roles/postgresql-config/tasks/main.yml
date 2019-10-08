@@ -16,6 +16,8 @@
     group=postgres
 
 - name: restart postgresql
+  shell:
+    update-rc.d postgresql enable
   systemd:
     name=postgresql
     state=restarted

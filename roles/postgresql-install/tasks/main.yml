@@ -17,13 +17,18 @@
     cache_valid_time=3600
     pkg=postgresql-contrib-{{ pgversion }}
 
-- name: python-psycopg2
-  apt:
-    update_cache=yes
-    cache_valid_time=3600
-    pkg=python-psycopg2
+- name: Install Packages
+  apt: >
+    pkg={{item}}
+    state=installed
+    update-cache=yes
+  with_items:
+    - build-essential
+    - python-dev
+    - python-setuptools
+    - python-psycopg2
+    - postgresql-{{ pgversion }}-postgis-{{ postgisversion }}
+    - postgresql-{{ pgversion }}-pgrouting
+    - libpq-dev
+    - pgtop
 
-- name: pgtop
-  apt:
-    update_cache=yes cache_valid_time=3600
-    pkg=pgtop
