@@ -1,11 +1,12 @@
 ---
+- name: configure shared_preload_libraries
+  shell:
+    /usr/bin/pg_conftool {{ pgversion }} main set shared_preload_libraries 'citus'
+
 - name: configure listen-addresses
   shell:
     /usr/bin/pg_conftool {{ pgversion }} main set listen_addresses '*'
 
-- name: configure shared_preload_libraries
-  shell:
-    /usr/bin/pg_conftool {{ pgversion }} main set shared_preload_libraries 'citus'
 
 - name: configure pg_hba.conf
   template:
@@ -18,6 +19,9 @@
 - name: restart postgresql
   shell:
     update-rc.d postgresql enable
-  systemd:
+
+- name: make sure postgresql is running
+  service:
     name=postgresql
-    state=restarted
+    state=started
+    enabled=yes

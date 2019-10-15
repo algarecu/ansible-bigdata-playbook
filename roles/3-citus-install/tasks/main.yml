@@ -1,0 +1,10 @@
+---
+- name: set up repository of citus extension
+  shell:
+    curl https://install.citusdata.com/community/deb.sh | sudo bash
+
+- name: Running Citus install with postgresql
+  apt:
+    update_cache=yes
+    cache_valid_time=3600
+    pkg=postgresql-{{ pgversion }}-citus-{{ citusversion }}

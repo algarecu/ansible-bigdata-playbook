@@ -8,8 +8,20 @@
   postgresql_ext:
     name: citus
     db: database
+    schema: citus
+    cascade: yes
+    state: present
+
+- name: create extension partman
+  postgresql_ext:
+    name: partman
+    db: database
+    schema: citus
+    cascade: no
 
 - name: create extension postgis
   postgresql_ext:
     name: postgis
     db: database
+    schema: postgis
+    cascade: yes

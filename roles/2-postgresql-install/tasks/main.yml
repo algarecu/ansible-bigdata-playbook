@@ -10,25 +10,25 @@
     update_cache=yes
     cache_valid_time=3600
     pkg=postgresql-{{ pgversion }}
+  tags: packages-postgresql
 
 - name: postgresql-contrib-{{ pgversion }}
   apt:
     update_cache=yes
     cache_valid_time=3600
     pkg=postgresql-contrib-{{ pgversion }}
+  tags: packages-postgresql
 
-- name: Install Packages
-  apt: >
-    pkg={{item}}
-    state=installed
-    update-cache=yes
-  with_items:
-    - build-essential
-    - python-dev
-    - python-setuptools
-    - python-psycopg2
-    - postgresql-{{ pgversion }}-postgis-{{ postgisversion }}
-    - postgresql-{{ pgversion }}-pgrouting
-    - libpq-dev
-    - pgtop
-
+- name: Install the rest of packages
+  apt:
+    pkg: [
+    'python-dev',
+    'build-essential',
+    'python-setuptools',
+    'python-psycopg2',
+    'postgresql-{{ pgversion }}-postgis-scripts',
+    'postgresql-{{ pgversion }}-pgrouting',
+    'libpq-dev',
+    'pgtop'
+    ]
+  tags: packages-extensions

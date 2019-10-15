@@ -6,11 +6,16 @@
 
   tasks:
     - name: create citus extension
-      shell: psql -d database -c "CREATE EXTENSION citus;"
-    - name: crate extension postgis
-      shell: psql -d database -c "CREATE EXTENSION postgis;"
+      shell: psql -d database -c "CREATE SCHEMA citus;"
+#      shell: psql -d database -c "CREATE SCHEMA partman;"
+#      shell: psql -d database -c "CREATE EXTENSION pg_partman WITH SCHEMA partman;"
+    - name: create extension postgis
+      shell: psql -d database -c "CREATE SCHEMA postgis;"
+#      shell: psql -d database -c "CREATE EXTENSION postgis SCHEMA postgis;"
+#      shell: psql -d database -c "SELECT postgis_full_version();"
     - name: add workers
       shell: psql -d database -c "SELECT * FROM master_add_node('{{ item }}', 5432);"
-      - debug: msg="host is {{item}}"
-        with_items: "{{ groups['worker'] }}"
-
+      with_items: "{{ groups['worker'] }}"
+      shell: psql -d database -c "SELECT * FROM master_get_active_worker_nodes();"
+    - debug: msg="host is {{item}}"
+      with_items: "{{ groups['worker'] }}"

@@ -1,0 +1,18 @@
+---
+- hosts: all
+  become: yes
+  become_user: root
+  become_method: sudo
+  gather_facts: yes
+  connection: local
+  vars:
+    pgversion: 11
+    citusversion: 8.3
+    postgisversion: 2.5
+    # ansible_python_interpreter: /usr/bin/python3
+  roles:
+    - 1-apt-pgdg
+    - 2-postgresql-install
+    - 3-citus-install
+    - 4-postgresql-config
+    - 5-config-database
