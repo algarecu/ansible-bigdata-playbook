@@ -4,12 +4,17 @@ Ansible playbook to deploy a citus cluster
 Playbooks
 =========
 
-* install-11.yml : install postgresql cluster
+* ansible-bigdata-playbook.yml : install postgresql cluster + extensions
 
 * config-database.yml : create a database and configure citus in it
 
 * citus.yml : activate citus on master node
 
+
+Built using
+=========
+
+* ubuntu version trusty64
 
 Howto
 =====
@@ -17,9 +22,9 @@ Howto
 Add to you inventory file two section, one called `master` for the
 master node, and one called `worker`
 
-Launch the playbook
+Launch the playbook in the master server
 
-`$ ansible-playbook -i hosts.ini install-11.yml`
+`$ ansible-playbook -i hosts.ini ansible-bigdata-playbook.yml`
 
 `$ ansible-playbook -i hosts.ini config-database.yml`
 
@@ -45,17 +50,21 @@ What the playbook do
 
 * install python psycopg2 librarie for ansible purpose
 
-* activate citus shared librarie
+* activate citus shared library
 
 * configure the clusters to be ready to use
 
-* create a first database called `citus` and activate citus extension
+* create a database called `citus` and activate citus extension
   in it
 
-Tested on
-=========
+Vagrant (test on a local network)
+=======
 
-* Debian Jessie
+* vagrant init
+* Edit the .Vagrantfile
+* vagrant up
+* vagrant status
+
 
 Warning
 =======
